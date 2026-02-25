@@ -7,7 +7,7 @@ on:
 
 env:
   REG_NAME: "acrinfofd22210.azurecr.io" # Nom du registy
-  IMAGE_NAME: "todo-app" # Nom de votre image
+  IMAGE_NAME: "app-backend-limat" # Nom de votre image
 
 jobs:
   build-and-deploy:
