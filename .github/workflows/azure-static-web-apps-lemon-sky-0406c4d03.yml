@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout du repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
         # Vérifie si le fichier existe et crée une sortie (output)
       - name: Vérifier l'existence du html dans le frontend
@@ -41,14 +41,7 @@ jobs:
           exit 1 
         # force l'échec du job si le fichier est absent
 
-# Installation de l'outil Lightouse CI Action
-name: Lighthouse CI
-on: push
-jobs:
-  lighthouse:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5  # clone le dépot Github dans la vm
+        # Installation de l'outil Lightouse CI Action
       - name: Tester les performances de notre app web
         uses: treosh/lighthouse-ci-action@v12
         with:
