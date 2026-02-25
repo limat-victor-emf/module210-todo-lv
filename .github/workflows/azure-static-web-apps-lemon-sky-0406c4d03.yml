@@ -41,6 +41,22 @@ jobs:
           exit 1 
         # force l'échec du job si le fichier est absent
 
+# Installation de l'outil Lightouse CI Action
+name: Lighthouse CI
+on: push
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5  # clone le dépot Github dans la vm
+      - name: Tester les performances de notre app web
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            https://todo-app.victorlimat.emf-informatique.ch/
+          uploadArtifacts: true # save results as an action artifacts
+          temporaryPublicStorage: true # upload lighthouse report to the temporary storage
+
   build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
