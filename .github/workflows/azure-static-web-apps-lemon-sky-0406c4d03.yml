@@ -10,6 +10,34 @@ on:
       - main
 
 jobs:
+
+# Vérification si le frontend existe et afficher avec echo un texte
+  check_file_existence:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du repo
+        uses: actions/checkout@v4
+
+        # Vérifie si le fichier existe et crée une sortie (output)
+      - name: Vérifier l'existence du html dans le frontend
+        id: check_html_frontend # Reference le résultat de l'output
+        uses: thebinaryfelix/check-file-existence-action@v1
+        with:
+          files: 'src/frontend/index.html'
+
+      - name: Afficher succès
+        if: steps.check_html_frontend.outputs.exists == 'true'
+        # Only runs if all of the files exist
+        run: echo "Le fichier index.html existe !"
+
+      - name: Afficher erreur et stopper
+        if: steps.check_html_frontend.outputs.exists != 'true'
+        # Only runs if all of the files exist
+        run: |
+          echo "Erreur : index.html n’existe pas!"
+          exit 1 
+        # force l'échec du job si le fichier est absent
+
   build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
