@@ -21,9 +21,12 @@ jobs:
         # Vérifie si le fichier existe et crée une sortie (output)
       - name: Vérifier l'existence du html dans le frontend
         id: check_html_frontend # Reference le résultat de l'output
-        uses: thebinaryfelix/check-file-existence-action@v4
-        with:
-          files: 'src/frontend/index.html'
+        run : |
+          if [ -f src/frontend/index.html ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else 
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Afficher succès
         if: steps.check_html_frontend.outputs.exists == 'true'
