@@ -24,7 +24,10 @@ jobs:
           username: ${{ secrets.AZURE_REGISTRY_USERNAME  }}
           password: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
           
-      - name: Build and push my Docker image
+      - name: Build my Docker image
         run: |
           docker build -t ${{env.REG_NAME}}/${{env.IMAGE_NAME}}:${{github.sha}} ./src/backend
+
+      - name: Push my Docker image
+        run: |
           docker push ${{env.REG_NAME}}/${{env.IMAGE_NAME}}:${{github.sha}}
