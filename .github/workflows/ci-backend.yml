@@ -23,7 +23,6 @@ jobs:
           registry: ${{ env.REG_NAME }}
           username: ${{ secrets.AZURE_REGISTRY_USERNAME  }}
           password: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
-        
 
       - name: Build my Docker image
         run: |
@@ -32,3 +31,7 @@ jobs:
       - name: Push my Docker image
         run: |
           docker push ${{env.REG_NAME}}/${{env.IMAGE_NAME}}:${{github.sha}}
+
+      # - name: Login to my registry
+      #   run: |
+      #     echo "<password>" | docker login registry.example.com -u <username> --password-stdin
