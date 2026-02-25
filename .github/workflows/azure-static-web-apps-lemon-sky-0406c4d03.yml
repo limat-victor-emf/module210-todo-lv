@@ -21,7 +21,7 @@ jobs:
         # Vérifie si le fichier existe et crée une sortie (output)
       - name: Vérifier l'existence du html dans le frontend
         id: check_html_frontend # Reference le résultat de l'output
-        uses: thebinaryfelix/check-file-existence-action@v1
+        uses: thebinaryfelix/check-file-existence-action@v4
         with:
           files: 'src/frontend/index.html'
 
