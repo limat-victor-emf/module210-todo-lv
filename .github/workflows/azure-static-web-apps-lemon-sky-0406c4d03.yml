@@ -49,6 +49,7 @@ jobs:
             https://todo-app.victorlimat.emf-informatique.ch/
           uploadArtifacts: true # save results as an action artifacts
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
+          configPath: ".lighthouserc.json" # indique ou lightouse va chercher les configurations de performance
 
   build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
